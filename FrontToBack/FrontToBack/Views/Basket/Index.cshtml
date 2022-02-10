@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<BasketVM>
+
+
+
+<div class="container">
+    <div class="row">
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 180px">Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/img/@item.Image" alt="" class="w-100">
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>
+                            <a asp-controller="Basket" asp-action="DecreaseProductBasketCount" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-minus" id="decreaseCount"></i>
+                            </a>
+                            @item.Count
+                            <a asp-controller="Basket" asp-action="IncreaseProductBasketCount" asp-route-id="@item.Id">
+                                <i class="fa-solid fa-plus" id="increaseCount"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <div>
+                                <a asp-controller="Basket" asp-action="DeleteProductFromBasket" asp-route-id="@item.Id">
+                                   <span style="color: red">Delete</span>
+                                </a>
+                            </div>
+                        </td>
+                        <td>@item.TotalPrice </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
